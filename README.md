@@ -16,3 +16,7 @@ Para el desarrollo de la aplicación web utilizaremos el framework [Flask](http:
 
 #Colaboradores
 Para la parte del diseño y puesta en marcha de la aplicación web colaboro con Javier Pérez (@neon520).
+
+#Preparación del entorno Virtual
+
+Entramos en nuestra carpeta y definimos nuestro entorno como `virtualenv landscapes` después lo activamos con `cd landscapes & source bin/activate`
