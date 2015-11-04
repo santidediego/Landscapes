@@ -39,3 +39,17 @@ En python, podemos generar un archivo con lo requerimientos básicos de la aplic
 
 Ejecutando la orden `make test` se pasan los test que he definido para el proyecto. El archivo makefile se encuentra dentro de la carpeta *Landscapes*. Una vez dentro ya se puede ejecutar `make test` para pasar los tests.
 
+#Tercer hito
+En esta tercera parte voy a integrar mi proyecto con Heroku. Para ello lo configuraré para que cuando se haga un *push* en el repositorio directamente se suba a Heroku.
+
+Primero de todo vamos al directorio donde tenemos clonado nuestro proyecto y ejecutamos `heroku create`. Nos pedirá nuestras credenciales de heroku, las escribimos y esperamos. Después ejecutamos `heroku keys:add` y selecionamos la clave ssh que hemos utilizado para Github. Ahora ya podemos conectarnos a Heroku por ssh. Ahora ejecutamos `pip3 install gunicorn` antes de activar Heroku.
+
+Ahora vamos a hacer uso de un fichero Procfile. Este fichero debemos definirlo en nuestro directorio raíz y es donde declaramos los comandos que deberían ser ejecutados al arrancar nuestra aplicación. 
+
+Lo creamos y dentro escribimos:
+``
+web: gunicorn hello:app --log-file=-
+``
+
+Una vez hecho esto ejecutamos `heroku create` para crear enlazar la aplicación con Heroku y luego ejecutamos `git push heroku master` y ya la tenemos integrada en Heroku.
+
