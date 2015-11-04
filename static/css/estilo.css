@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "My_font";
+  src: url("fuente_titulo.ttf");
+}
+
+html
+{
+
+
+	background: url(../wallpaper/golden_bridge2.jpg) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1
+{
+	font-size: 8em;
+	font-family: monospace, monospace;
+	word-spacing: 20px;
+	text-align: center;
+	color: #F2F5A9;
+}
