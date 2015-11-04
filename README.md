@@ -48,7 +48,7 @@ Ahora vamos a hacer uso de un fichero Procfile. Este fichero debemos definirlo e
 
 Lo creamos y dentro escribimos:
 ``
-web: gunicorn hello:app --log-file=-
+web: gunicorn hello:app --log-file=logs
 ``
 
 Una vez hecho esto ejecutamos `heroku create` para crear enlazar la aplicación con Heroku y luego ejecutamos `git push heroku master` y ya la tenemos integrada en Heroku.
