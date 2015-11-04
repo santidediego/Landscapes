@@ -53,3 +53,4 @@ web: gunicorn hello:app --log-file=-
 
 Una vez hecho esto ejecutamos `heroku create` para crear enlazar la aplicación con Heroku y luego ejecutamos `git push heroku master` y ya la tenemos integrada en Heroku.
 
+Una vez hecho esto, desde el propio Heroku podemos configurar el despliegue automático desde Github. Además es conveniente que marquemos la casilla de despliegue sólo si se han pasado los test. La configuración queda como aparece en la imagen
