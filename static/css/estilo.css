@@ -1,9 +1,5 @@
-@font-face {
-  font-family: "My_font";
-  src: url("fuente_titulo.ttf");
-}
 
-html
+html.portada
 {
 
 
@@ -12,13 +8,19 @@ html
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    font-family: monospace, monospace;
+    color: #F2F5A9;
+    text-align: center;
 }
 
 h1
 {
 	font-size: 8em;
-	font-family: monospace, monospace;
 	word-spacing: 20px;
-	text-align: center;
-	color: #F2F5A9;
+
+}
+
+form.registro
+{
+    font-size: 2em;
 }
