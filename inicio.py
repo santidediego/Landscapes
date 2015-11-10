@@ -2,12 +2,12 @@
 
 from flask import Flask, render_template, request, redirect
 from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, SelectField, RadioField, DateField, validators
-from pymongo import MongoClient
+#from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017/')
+#client = MongoClient('mongodb://localhost:27017/')
 app = Flask(__name__)
-db=client['users_database']
-collection = db.user_collection
+#db=client['users_database']
+#collection = db.user_collection
 
 class RegistrationForm(Form):
     username = TextField('Nombre de Usuario', [validators.Length(min=4, max=25)])
