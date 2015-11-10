@@ -42,17 +42,24 @@ Ejecutando la orden `make test` se pasan los test que he definido para el proyec
 #Tercer hito
 En esta tercera parte voy a integrar mi proyecto con Heroku. Para ello lo configuraré para que cuando se haga un *push* en el repositorio directamente se suba a Heroku.
 
-Primero de todo vamos al directorio donde tenemos clonado nuestro proyecto y ejecutamos `heroku create`. Nos pedirá nuestras credenciales de heroku, las escribimos y esperamos. Después ejecutamos `heroku keys:add` y selecionamos la clave ssh que hemos utilizado para Github. Ahora ya podemos conectarnos a Heroku por ssh. Ahora ejecutamos `pip3 install gunicorn` antes de activar Heroku.
+Primero de todo ejecutamos `pip3 install gunicorn`.  Después ejecutamos `heroku keys:add` y selecionamos la clave ssh que hemos utilizado para Github. Ahora ya podemos conectarnos a Heroku por ssh. Ahora ya vamos a la página de heroku, le damos a nueva aplicación y le ponemos un nombre.
+
 
 Ahora vamos a hacer uso de un fichero Procfile. Este fichero debemos definirlo en nuestro directorio raíz y es donde declaramos los comandos que deberían ser ejecutados al arrancar nuestra aplicación. 
 
 Lo creamos y dentro escribimos:
-``
-web: gunicorn hello:app --log-file=logs
-``
 
-Una vez hecho esto ejecutamos `heroku create` para crear enlazar la aplicación con Heroku y luego ejecutamos `git push heroku master` y ya la tenemos integrada en Heroku.
+```
+web: gunicorn inicio:app --log-file=logs
+```
+
+ya que *inicio.py* es el nombre de nuestro archivo python que carga la aplicación.
 
 Una vez hecho esto, desde el propio Heroku podemos configurar el despliegue automático desde Github. Además es conveniente que marquemos la casilla de despliegue sólo si se han pasado los test. La configuración queda como aparece en la imagen:
 
 ![Github-Heroku](http://i864.photobucket.com/albums/ab201/Santiago_de_Diego/Githu-Heroku_zpskiwpnetq.png)
+
+Y ya tenemos configurado nuestro despliegue automático, una vez se haga *git push* al repositorio. Se puede visitar mi aplicación [aquí](https://landscapes93.herokuapp.com)
+
+##Runtime.txt
+He tenido varios problemas para el despliegue en Heroku. El motivo era que no tenía creado un [fichero runtime.txt](https://devcenter.heroku.com/articles/python-runtimes) que es necesario para especificar la versión de python que estás utilizando.
