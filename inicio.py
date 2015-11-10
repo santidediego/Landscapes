@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 
 from flask import Flask, render_template, request, redirect
 from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, SelectField, RadioField, DateField, validators
