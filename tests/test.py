@@ -1,8 +1,38 @@
-
 from flask import Flask
 from nose.tools import assert_equal
+import unittest
+import os
+import inicio
+import tempfile
 from flask.ext.testing import TestCase
-# Create your tests here.
+
+class inicioTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.db_fd, inicio.app.config['DATABASE'] = tempfile.mkstemp()
+        inicio.app.config['TESTING'] = True
+        self.app = inicio.app.test_client()
+        #inicio.init_db()
+
+    def tearDown(self):
+        os.close(self.db_fd)
+        os.unlink(inicio.app.config['DATABASE'])
+
+    #Aqui acaba el esqueleto principal
+
+    #Ver si la página carga Landscapes correctamente
+    def test_empty(self):
+        rv = self.app.get('/')
+        self.assertTrue('Landscapes' in str(rv.data))
+
+    #Ver si la página carga correctamente
+    def test_home_status_code(self):
+        # sends HTTP GET request to the application
+        # on the specified path
+        result = self.app.get('/')
+        # assert the status code of the response
+        self.assertEqual(result.status_code, 200)
+
 class Test:
     def suma(self, n1,n2):
         return n1+n2
@@ -11,14 +41,14 @@ class Test:
         suma = Test()
         response = suma.suma(4,2)
         assert_equal(response, 6)
+"""
 
-'''
-class TestNotRenderTemplates(TestCase):
-
-    render_templates = False
-
-    def test_assert_not_process_the_template(self):
-        response = self.client.get("/template/")
-
-        assert "" == response.data
-'''
+    def test_home_status_code(self):
+        # sends HTTP GET request to the application
+        # on the specified path
+        result = self.app.get('/')
+        # assert the status code of the response
+        self.assertEqual(result.status_code, 200)
+"""
+if __name__ == '__main__':
+    unittest.main()
