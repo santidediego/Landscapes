@@ -19,11 +19,28 @@ class RegistrationForm(Form):
 
 
 @app.route("/",methods=['GET', 'POST'])
-def hello():
-        form = RegistrationForm(request.form)
-        if request.method == 'POST' and form.validate():
-            return('¡Gracias %s por registrarte!' % form.username.data)
-        return render_template("index.html", form=form)
+def login():
+        return render_template("index.html")
+
+@app.route("/inicio",methods=['GET', 'POST'])
+def inicio():
+        return render_template("inicio.html")
+
+@app.route("/lugares",methods=['GET', 'POST'])
+def lugares():
+        return render_template("lugares.html")
+
+@app.route("/subir",methods=['GET', 'POST'])
+def subir():
+        return render_template("subir.html")
+
+@app.route("/nosotros",methods=['GET', 'POST'])
+def nosotros():
+        return render_template("nosotros.html")
+
+@app.route("/contacto",methods=['GET', 'POST'])
+def contacto():
+        return render_template("contacto.html")
 
 if __name__ == "__main__":
     app.run()
