@@ -81,3 +81,6 @@ Una vez hecho esto, creamos un [Dockerfile](https://github.com/santidediego/Land
 Sin más que ejecutar `sudo docker build -t landscapes .` comienza todo el proceso. Con `build -t` le decimos que utilice el Dockerfile situado en `.` y `landscapes` es el nombre que tendrá el contenedor.
 
 Una vez está todo instalado, podemos ver el contenedor en su [repositorio correspondiente de DockerHub]()  ¡AVISO: AUN NO HAY REPOSITORIO!
+
+###Posible problema
+Al arrancar el contenedor me encuentro con que no tiene conexión a internet. En mi caso lo he solucionado editando el archivo `/etc/NetworkManager/NetworkManager.conf` y comentando la línea `dns=dnsmask`. Sin mas que ejecutar luego `sudo restart network-manager` ya funciona correctamente. Se puede ver el problema y la solución es [esta issue](https://github.com/docker/docker/issues/1809)
