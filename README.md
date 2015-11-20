@@ -84,3 +84,6 @@ Una vez está todo instalado, podemos ver el contenedor en su [repositorio corre
 
 ###Posible problema
 Al arrancar el contenedor me encuentro con que no tiene conexión a internet. En mi caso lo he solucionado editando el archivo `/etc/NetworkManager/NetworkManager.conf` y comentando la línea `dns=dnsmask`. Sin mas que ejecutar luego `sudo restart network-manager` ya funciona correctamente. Se puede ver el problema y la solución es [esta issue](https://github.com/docker/docker/issues/1809)
+
+###Añadiéndolo a DockerHub
+Primero de todo he tenido que asignar un tag a mi contenedor para que coincida con el repositorio que he creado en Docker Hub, que en mi caso era *santidediego/landscapes*. El tag se lo asigno con `docker tag b66ff6f57f2e santidediego/landscapes` . Una vez hecho esto ejecuto `docker push santidediego/landscapes` y comienza a subirse.
