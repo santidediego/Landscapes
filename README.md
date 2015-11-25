@@ -26,7 +26,7 @@ Para la parte del diseño y puesta en marcha de la aplicación web colaboro con 
 
 Entramos en nuestra carpeta y definimos nuestro entorno como `virtualenv landscapes` después lo activamos con `cd landscapes & source bin/activate`
 
-#Segundo hito
+#Integración continua
 
 En esta segunda parte añadiré integración continua al repositorio. Para ello utilizaré [Travis](https://travis-ci.org).
 
@@ -44,7 +44,7 @@ En python, podemos generar un archivo con lo requerimientos básicos de la aplic
 
 Ejecutando la orden `make test` se pasan los test que he definido para el proyecto. El archivo makefile se encuentra dentro de la carpeta *Landscapes*. Una vez dentro ya se puede ejecutar `make test` para pasar los tests.
 
-#Tercer hito
+#Despliegue en Heroku
 En esta tercera parte voy a integrar mi proyecto con Heroku. Para ello lo configuraré para que cuando se haga un *push* en el repositorio directamente se suba a Heroku.
 
 Primero de todo ejecutamos `pip3 install gunicorn`.  Después ejecutamos `heroku keys:add` y selecionamos la clave ssh que hemos utilizado para Github. Ahora ya podemos conectarnos a Heroku por ssh. Ahora ya vamos a la página de heroku, le damos a nueva aplicación y le ponemos un nombre.
@@ -69,7 +69,7 @@ Y ya tenemos configurado nuestro despliegue automático, una vez se haga *git pu
 ##Runtime.txt
 He tenido varios problemas para el despliegue en Heroku. El motivo era que no tenía creado un [fichero runtime.txt](https://devcenter.heroku.com/articles/python-runtimes) que es necesario para especificar la versión de python que estás utilizando.
 
-#Cuarto hito
+#Subiendo el proyecto a Docker
 En esta parte vamos a configurar un Docker para almacenar el proyecto. Primero de todo he instalado Docker en un equipo en el que tengo Ubuntu. He instalado Docker mediante el comando: `wget -qO- https://get.docker.com/ | sh`	
 
 Después basta ejecutar `sudo usermod -aG docker santiago` para no tener que estar haciendo `sudo` todo el rato cada vez que instalemos algo dentro de nuestro contenedor. Con `sudo nohup docker -d&` arrancamos el demonio de Docker y probamos que efectivamente funciona con `docker run hello-world`
