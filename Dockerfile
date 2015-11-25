@@ -1,5 +1,5 @@
 FROM ubuntu
-RUN mkdir /home
+RUN apt-get install -y git  #Primero de todo instalamos git
 RUN cd /home && git clone https://github.com/santidediego/Landscapes
 #COPY ./ /home/Landscapes
 RUN cd /home/Landscapes && chmod a+x docker_run
