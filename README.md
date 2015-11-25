@@ -15,7 +15,7 @@ La idea del proyecto surge de una necesidad que me planteé en su día como fot�
 
 ##Detalles en la elaboración
 
-Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos gestionada con mySQL con los usuarios y sus lugares marcados en un servidor en la nube. El despliegue lo haré casi seguramente en Bluemix, aunque también me planteo utilizar otro servidor como por ejemplo Azure para realizar réplicas de la base de datos como seguridad ante fallos.
+Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos gestionada con mySQL con los usuarios y sus lugares marcados en un servidor en la nube. El despliegue lo haré en Heroku.
 
 Para el desarrollo de la aplicación web utilizaremos el framework [Flask](http://flask.pocoo.org)
 
@@ -36,9 +36,9 @@ Sin añadir todavía ningún test, solamente con la configuración de las librer
 
 ![Integración continua](http://i864.photobucket.com/albums/ab201/Santiago_de_Diego/Integracion%20continua%20flask_zps3r8smu6w.png)
 
-##Archivo requeriments
+##Archivo requirements
 
-En python, podemos generar un archivo con lo requerimientos básicos de la aplicación. Esto lo hacemos sin más que ejecutar `pip3 freeze > requeriments.txt`
+En python, podemos generar un archivo con lo requerimientos básicos de la aplicación. Esto lo hacemos sin más que ejecutar `pip3 freeze > requirements.txt`
 
 ##Makefile
 
