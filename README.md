@@ -71,7 +71,7 @@ He tenido varios problemas para el despliegue en Heroku. El motivo era que no te
 
 #Subiendo el proyecto a Docker
 
-Podemos ver los pasos seguidos [aquí]()
+Podemos ver los pasos seguidos [aquí](https://github.com/santidediego/Landscapes/blob/master/PASOS.md)
 
 ###Posible problema
 Al arrancar el contenedor me encuentro con que no tiene conexión a internet. En mi caso lo he solucionado editando el archivo `/etc/NetworkManager/NetworkManager.conf` y comentando la línea `dns=dnsmask`. Sin mas que ejecutar luego `sudo restart network-manager` ya funciona correctamente. Se puede ver el problema y la solución es [esta issue](https://github.com/docker/docker/issues/1809)
