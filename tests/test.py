@@ -66,14 +66,14 @@ class BD_Test(unittest.TestCase):
 
     def tearDown(self):
         pass
-
+        '''
     def test_create_user(self):
         collection = test.test_collection
         test.test_collection.save(
         {
            username: "ejemplo",
            email: "ejemplo.mail.com"  
-        })
+        })'''
 
 
 if __name__ == '__main__':
