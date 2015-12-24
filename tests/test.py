@@ -67,7 +67,8 @@ class BD_Test(unittest.TestCase):
                "username": "ejemplo",
                "email": "ejemplo.mail.com"  
            })
-     def test_delete_user(self):
+           
+    def test_delete_user(self):
            client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
            db=client['test']
            db.test_collection.remove({"username": "ejemplo"})
