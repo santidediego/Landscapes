@@ -75,7 +75,7 @@ class BD_Test(unittest.TestCase):
         })
      """
     def test_create_user(self):
-           client = MongoClient('mongodb://santiago:09021993@40.117.96.16:27017')  
+           client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
            db=client['test']
            db.test_collection.save(
            {
