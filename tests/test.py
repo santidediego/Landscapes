@@ -79,8 +79,8 @@ class BD_Test(unittest.TestCase):
            db=client['test']
            db.test_collection.save(
            {
-               username: "ejemplo",
-               email: "ejemplo.mail.com"  
+               "username": "ejemplo",
+               "email": "ejemplo.mail.com"  
            })
 
 if __name__ == '__main__':
