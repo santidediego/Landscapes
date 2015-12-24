@@ -53,8 +53,8 @@ class Test:
 """
 class BD_Test(unittest.TestCase):
     def setUp(self):
-        app.config['TESTING'] = True
-        app.config["MONGODB_DB"] = 'test'
+        inicio.app.config['TESTING'] = True
+        inicio.app.config["MONGODB_DB"] = 'test'
         connect(
             'test',
             username='mongouser',
@@ -62,7 +62,7 @@ class BD_Test(unittest.TestCase):
             host='40.117.96.16',
             port=27017
         )
-        self.app = app.test_client()
+        self.app = inicio.app.test_client()
 
     def tearDown(self):
         pass
