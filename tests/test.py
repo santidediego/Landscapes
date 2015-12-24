@@ -54,21 +54,23 @@ class BD_Test(unittest.TestCase):
     def setUp(self):
         inicio.app.config['TESTING'] = True
         inicio.app.config["MONGODB_DB"] = 'test'
-        client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
-        db=client['test']
         self.app = inicio.app.test_client()
 
     def tearDown(self):
         pass
     
     def test_create_user(self):
-           #client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
-           #db=client['test']
+           client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
+           db=client['test']
            db.test_collection.save(
            {
                "username": "ejemplo",
                "email": "ejemplo.mail.com"  
            })
+     def test_delete_user(self):
+           client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
+           db=client['test']
+           db.test_collection.remove({"username": "ejemplo"})
            
 if __name__ == '__main__':
     unittest.main()
