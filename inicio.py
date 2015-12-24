@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect
 from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, SelectField, RadioField, DateField, validators
 #from pymongo import MongoClient
 
-#client = MongoClient('mongodb://localhost:27017/')
+#client = MongoClient('mongodb://santiago:09021993@40.117.96.16:27017')
 app = Flask(__name__)
 #db=client['users_database']
 #collection = db.user_collection

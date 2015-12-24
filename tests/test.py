@@ -5,6 +5,7 @@ import os
 import inicio
 import tempfile
 from flask.ext.testing import TestCase
+from mongoengine import connect
 
 class inicioTestCase(unittest.TestCase):
 
@@ -50,5 +51,26 @@ class Test:
         # assert the status code of the response
         self.assertEqual(result.status_code, 200)
 """
+class BD_Test(unittest.TestCase):
+    def setUp(self):
+        app.config['TESTING'] = True
+        app.config["MONGODB_DB"] = 'test'
+        connect(
+            'test',
+            username='mongouser',
+            password='09021993',
+            host='40.117.96.16',
+            port=27017
+        )
+        self.app = app.test_client()
+
+    def tearDown(self):
+        pass
+
+    def test_create_user(self):
+        u = User(username='user', email='user@example.com')
+        u.save()
+
+
 if __name__ == '__main__':
     unittest.main()
