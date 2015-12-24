@@ -8,7 +8,7 @@ from flask.ext.testing import TestCase
 from mongoengine import connect
 
 class inicioTestCase(unittest.TestCase):
-
+'''
     def setUp(self):
         self.db_fd, inicio.app.config['DATABASE'] = tempfile.mkstemp()
         inicio.app.config['TESTING'] = True
@@ -18,7 +18,7 @@ class inicioTestCase(unittest.TestCase):
     def tearDown(self):
         os.close(self.db_fd)
         os.unlink(inicio.app.config['DATABASE'])
-
+'''
     #Aqui acaba el esqueleto principal
 
     #Ver si la página carga Landscapes correctamente
