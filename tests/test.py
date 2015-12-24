@@ -55,9 +55,6 @@ class BD_Test(unittest.TestCase):
         inicio.app.config['TESTING'] = True
         inicio.app.config["MONGODB_DB"] = 'test'
         self.app = inicio.app.test_client()
-
-    def tearDown(self):
-        pass
     
     def test_create_user(self):
            client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
