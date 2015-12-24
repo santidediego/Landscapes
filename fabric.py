@@ -20,3 +20,6 @@ def getDocker():
 	run('sudo apt-get update')
 	run('sudo apt-get install -y docker.io')
 	run('sudo docker pull santidediego/landscapes')
+    
+def test():
+    run('cd /home/Landscapes && nosetests ./tests/test.py')
