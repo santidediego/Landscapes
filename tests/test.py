@@ -68,8 +68,12 @@ class BD_Test(unittest.TestCase):
         pass
 
     def test_create_user(self):
-        u = User(username='user', email='user@example.com')
-        u.save()
+        collection = test.test_collection
+        test.test_collection.save(
+        {
+           username: "ejemplo",
+           email: "ejemplo.mail.com"  
+        })
 
 
 if __name__ == '__main__':
