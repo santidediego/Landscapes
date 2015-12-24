@@ -66,18 +66,7 @@ class BD_Test(unittest.TestCase):
 
     def tearDown(self):
         pass
-        
-    def test_create_user(self):
-        MONGODB_DB.test_collection.save(
-        {
-           "username": "ejemplo",
-           "email": "ejemplo.mail.com"  
-        })
-        
-    def test_delete_user(self):
-        MONGODB_DB.test_collection.remove({"username": "ejemplo"})
     
-    ''' ESTA ES LA MANERA DE TESTEARLO SIN USAR LA LIBRERIA MONGOENGINE
     def test_create_user(self):
            client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
            db=client['test']
@@ -86,6 +75,6 @@ class BD_Test(unittest.TestCase):
                "username": "ejemplo",
                "email": "ejemplo.mail.com"  
            })
-     '''
+           
 if __name__ == '__main__':
     unittest.main()
