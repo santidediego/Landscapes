@@ -6,7 +6,7 @@ import inicio
 import tempfile
 from flask.ext.testing import TestCase
 from mongoengine import connect
-
+from pymongo import MongoClient
 class inicioTestCase(unittest.TestCase):
     
     def setUp(self):
