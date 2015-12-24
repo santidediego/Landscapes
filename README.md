@@ -87,3 +87,6 @@ Para instalar el contenedor en local, basta ejecutar:
 y el contenedor comienza a instalarse. No hace falta hacer nada más, una vez terminada la instalación, se ejecuta automáticamente la aplicación siguiendo las directrices del Dockerfile que a su vez enlaza con los scripts de instalación y configuración.
 
 Se puede encontrar el docker de mi proyecto [aquí](https://hub.docker.com/r/santidediego/landscapes/)
+
+#Despliegue automático con fabric
+He decidido hacer un depsliegue con fabric en una Máquina Virtual Azure con Ubuntu 15, para ello, utilizaré un fichero [fabric.py]() en el que aparecen varias directivas para trabajar remotamente con nuestra MV. El proceso seguido es similar al utilizado para la [creación de la base MongoDB en Azure](https://github.com/santidediego/Landscapes/blob/master/Instalación%20y%20configuración%20de%20la%20MV%20con%20mongo%20en%20azure.md) solo que con otra máquina virtual distinta. En este caso podemos conectarnos a nuestra máquina por ssh con `ssh 40.114.215.241 `
