@@ -5,7 +5,6 @@ import os
 import inicio
 import tempfile
 from flask.ext.testing import TestCase
-from mongoengine import connect
 from pymongo import MongoClient
 class inicioTestCase(unittest.TestCase):
     
@@ -55,21 +54,16 @@ class BD_Test(unittest.TestCase):
     def setUp(self):
         inicio.app.config['TESTING'] = True
         inicio.app.config["MONGODB_DB"] = 'test'
-        connect(
-            'test',
-            username='mongouser',
-            password='09021993',
-            host='40.117.96.16',
-            port=27017
-        )
+        client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
+        db=client['test']
         self.app = inicio.app.test_client()
 
     def tearDown(self):
         pass
     
     def test_create_user(self):
-           client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
-           db=client['test']
+           #client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
+           #db=client['test']
            db.test_collection.save(
            {
                "username": "ejemplo",
