@@ -8,7 +8,7 @@ from flask.ext.testing import TestCase
 from mongoengine import connect
 
 class inicioTestCase(unittest.TestCase):
-    """
+    
     def setUp(self):
         self.db_fd, inicio.app.config['DATABASE'] = tempfile.mkstemp()
         inicio.app.config['TESTING'] = True
@@ -18,7 +18,7 @@ class inicioTestCase(unittest.TestCase):
     def tearDown(self):
         os.close(self.db_fd)
         os.unlink(inicio.app.config['DATABASE'])
-    """    
+        
     #Aqui acaba el esqueleto principal
 
     #Ver si la página carga Landscapes correctamente
@@ -66,15 +66,22 @@ class BD_Test(unittest.TestCase):
 
     def tearDown(self):
         pass
-    '''    
+    """    
     def test_create_user(self):
-        collection = test.test_collection
-        test.test_collection.save(
+        MONGODB_DB.test_collection.save(
         {
            username: "ejemplo",
            email: "ejemplo.mail.com"  
         })
-    '''    
+     """
+    def test_create_user(self):
+           client = MongoClient('mongodb://santiago:09021993@40.117.96.16:27017')  
+           db=client['test']
+           db.test_collection.save(
+           {
+               username: "ejemplo",
+               email: "ejemplo.mail.com"  
+           })
 
 if __name__ == '__main__':
     unittest.main()
