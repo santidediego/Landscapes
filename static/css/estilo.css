@@ -21,3 +21,29 @@ form.registro
 {
     font-size: 2em;
 }
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: white;
+  text-shadow: none; /* Prevent inheritence from `body` */
+  background-color: #0B243B;
+  border: 1px solid #fff;
+}
+
+input
+{
+    color: black;
+}
+
+label
+{
+    color: white;
+}
+
+h2
+{
+    color: steelblue ; 
+    font-size: 50px;   
+}

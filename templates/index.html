@@ -8,7 +8,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Red social de fotografía">
     <meta name="author" content="Santiago de Diego">
-    <link rel="stylesheet" type="text/css" href="../static/css/estilo.css">
 
     <title>Portada</title>
 
@@ -17,6 +16,7 @@
     <link href="../static/css/bootstrap-responsive.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../static/css/login.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/estilo.css">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -28,26 +28,49 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
+  {% macro render_field(field) %}
+              <dt>{{ field.label }}
+              <dd>{{ field(**kwargs)|safe }}
+              {% if field.errors %}
+                  <ul class=errors>
+                  {% for error in field.errors %}
+                      <li>{{ error }}</li>
+                  {% endfor %}
+                  </ul>
+              {% endif %}
+              </dd>
+            {% endmacro %}
   <body class= "portada">
 
     <h1 class="portada">Landscapes</h1>
 
     <div class="container">
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Introduzca sus datos</h2>
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Recordar datos
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-      </form>
+                <form class= "form_register" method=post action="/">
+                <h2>Introduzca sus datos</h2>
+                <dl>
+                <div class="form-group">
+                    {{ render_field(form.name) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.lastname) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.email) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.username) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.password) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.confirm) }}
+                </div>
+              </dl>
+              <p><input class="btn btn-sm btn-primary" type=submit value=Registro>
+                 <a href="/login" class="btn btn-sm btn-primary">Login</a>
+              </p>
+            </form>
 
     </div> <!-- /container -->
 
