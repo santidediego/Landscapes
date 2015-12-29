@@ -45,7 +45,7 @@
 
     <div class="container">
                 <form class= "form_register" method=post action="/login">
-                <h2>Introduzca sus datos</h2>
+                <h2 class="portada">Introduzca sus datos</h2>
                 <dl>
                 <div class="form-group">
                     {{ render_field(form.username) }}
@@ -58,6 +58,9 @@
               </p>
             </form>
 
+    <h3 class="portada">Si por el contrario no está registrado:</h3>
+    <p><a href="/registro" class="btn btn-sm btn-primary">Regístrese aquí</a>
+     </p>
     </div> <!-- /container -->
 
   </body>

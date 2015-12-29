@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, url_for, flash
 from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, SelectField, RadioField, DateField, validators
 from pymongo import MongoClient
 from flask.ext.login import LoginManager, login_user, logout_user, login_required
@@ -17,8 +17,8 @@ lm.login_view = 'login'
 
 #Database config
 WTF_CSRF_ENABLED = True
-client = MongoClient('mongodb://localhost:27017/')
-#client = MongoClient('mongodb://santiago:09021993@40.117.96.16:27017')
+#client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')
 database = client['Mongo_DB']
 USER_COLLECTION = database.users
 DEBUG = True
@@ -46,8 +46,9 @@ class User():
         return self.username
 
     @staticmethod
-    def validate_login(password_hash, password):
-        return check_password_hash(password_hash, password)
+    def validate_login(pass1, pass2):
+        return pass1==pass2
+        #return check_password_hash(password_hash, password)
 
 
 #Forms
@@ -91,8 +92,8 @@ def login():
         if request.method == 'POST' and form.validate():
                 print("Pasa1")
                 user = USER_COLLECTION.find_one({"_id": form.username.data})
-                print("Pasa2")
-                if user and User.validate_login(user['password'], form.password.data):
+                print(user)
+                if user and User.validate_login(user['_password'], form.password.data):
                     print("Pasa3")
                     user_obj = User(user['_id'])
                     login_user(user_obj)

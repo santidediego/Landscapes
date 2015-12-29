@@ -50,8 +50,13 @@ label
     color: white;
 }
 
-h2
+h2.portada
 {
     color: steelblue ; 
     font-size: 50px;   
+}
+h3.portada
+{
+    padding-top: 3%;
+    color: white ;  
 }
