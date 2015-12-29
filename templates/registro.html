@@ -28,16 +28,49 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  {% macro render_field(field) %}
+              <dt>{{ field.label }}
+              <dd>{{ field(**kwargs)|safe }}
+              {% if field.errors %}
+                  <ul class=errors>
+                  {% for error in field.errors %}
+                      <li>{{ error }}</li>
+                  {% endfor %}
+                  </ul>
+              {% endif %}
+              </dd>
+            {% endmacro %}
   <body class= "portada">
 
     <h1 class="portada">Landscapes</h1>
 
     <div class="container">
-       
-              <p>
-                 <a href="/registro" class="btn btn-lg btn-primary">Registro</a>
-                 <a href="/login" class="btn btn-lg btn-primary">Login</a>
+                <form class= "form_register" method=post action="/">
+                <h2>Introduzca sus datos</h2>
+                <dl>
+                <div class="form-group">
+                    {{ render_field(form.name) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.lastname) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.email) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.username) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.password) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.confirm) }}
+                </div>
+              </dl>
+              <p><input class="btn btn-sm btn-primary" type=submit value=Registro>
               </p>
+            </form>
+
     </div> <!-- /container -->
 
   </body>

@@ -1,16 +1,53 @@
 # -*- encoding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, SelectField, RadioField, DateField, validators
 from pymongo import MongoClient
+from flask.ext.login import LoginManager, login_user, logout_user, login_required
+from werkzeug.security import check_password_hash
+
+
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-#Database config
+lm = LoginManager()
+lm.init_app(app)
+lm.login_view = 'login'
 
-#client = MongoClient('mongodb://localhost:27017/')
+
+
+#Database config
+WTF_CSRF_ENABLED = True
+client = MongoClient('mongodb://localhost:27017/')
 #client = MongoClient('mongodb://santiago:09021993@40.117.96.16:27017')
-#database = client['Mongo_DB']
-#users = database.user_collection
+database = client['Mongo_DB']
+USER_COLLECTION = database.users
+DEBUG = True
+
+
+#Users config
+
+
+class User():
+
+    def __init__(self, username):
+        self.username = username
+        self.email = None
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.username
+
+    @staticmethod
+    def validate_login(password_hash, password):
+        return check_password_hash(password_hash, password)
 
 
 #Forms
@@ -30,7 +67,7 @@ class RegistrationForm(Form):
 class LoginForm(Form):
     username = TextField('Nombre de Usuario', [validators.Length(min=4, max=25)])
     password = PasswordField('Contraseña', [
-        validators.Required(),
+        validators.Required()
     ])
 
 
@@ -40,33 +77,74 @@ def portada():
         if request.method == 'POST' and form.validate():
              return redirect('/inicio')
         return render_template("index.html", form=form)
-
-@app.route("/inicio",methods=['GET', 'POST'])
-def inicio():
-        return render_template("inicio.html")
+        
+@app.route("/registro",methods=['GET', 'POST'])
+def register():
+        form = RegistrationForm(request.form)
+        if request.method == 'POST' and form.validate():
+             return redirect('/inicio')
+        return render_template("registro.html", form=form)
         
 @app.route("/login",methods=['GET', 'POST'])
 def login():
         form = LoginForm(request.form)
         if request.method == 'POST' and form.validate():
-             return redirect('/inicio')
+                print("Pasa1")
+                user = USER_COLLECTION.find_one({"_id": form.username.data})
+                print("Pasa2")
+                if user and User.validate_login(user['password'], form.password.data):
+                    print("Pasa3")
+                    user_obj = User(user['_id'])
+                    login_user(user_obj)
+                    flash("Correcto!", category='success')
+                    print("Pasa4")
+                    return redirect('/inicio') #Hay que retocarlo, hay que usar la utilidad next que aparece en el tutorial
+                print("Pasa5")
+                flash("Nombre de usuario o contraseña erróneos!") #No hace nada, comprobar
+                print("Pasa6")
         return render_template("login.html", form=form)
 
+
+@app.route("/inicio",methods=['GET', 'POST'])
+@login_required
+def inicio():
+        return render_template("inicio.html")
+
 @app.route("/lugares",methods=['GET', 'POST'])
+@login_required
 def lugares():
         return render_template("lugares.html")
 
 @app.route("/subir",methods=['GET', 'POST'])
+@login_required
 def subir():
         return render_template("subir.html")
 
 @app.route("/nosotros",methods=['GET', 'POST'])
+@login_required
 def nosotros():
         return render_template("nosotros.html")
 
 @app.route("/contacto",methods=['GET', 'POST'])
+@login_required
 def contacto():
         return render_template("contacto.html")
+        
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+    
+    
+    
+@lm.user_loader
+def load_user(username):
+    u = USER_COLLECTION.find_one({"_id": username})
+    if not u:
+        return None
+    return User(u['_id'])
+    
+    
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
