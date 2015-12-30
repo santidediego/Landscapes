@@ -64,13 +64,20 @@ class RegistrationForm(Form):
             validators.Length(min=6, max=35),
             validators.Regexp(regex='\w+@(\w+)\.com|es',message='Dirección no válida')])
     confirm = PasswordField('Repite la contraseña')
-    
+
 class LoginForm(Form):
     username = TextField('Nombre de Usuario', [validators.Length(min=4, max=25)])
     password = PasswordField('Contraseña', [
         validators.Required()
     ])
 
+def guardar_datos(form):
+    USER_COLLECTION.insert({"_id": str(form.username.data),
+                            "_password": str(form.password.data),
+                            "_lastname": str(form.lastname.data),
+                            "_name": str(form.name.data),
+                            "_email": str(form.email.data)
+                            })
 
 @app.route("/",methods=['GET', 'POST'])
 def portada():
@@ -78,14 +85,15 @@ def portada():
         if request.method == 'POST' and form.validate():
              return redirect('/inicio')
         return render_template("index.html", form=form)
-        
+
 @app.route("/registro",methods=['GET', 'POST'])
 def register():
         form = RegistrationForm(request.form)
         if request.method == 'POST' and form.validate():
-             return redirect('/inicio')
+             guardar_datos(form)
+             return redirect('/login')
         return render_template("registro.html", form=form)
-        
+
 @app.route("/login",methods=['GET', 'POST'])
 def login():
         form = LoginForm(request.form)
@@ -130,22 +138,22 @@ def nosotros():
 @login_required
 def contacto():
         return render_template("contacto.html")
-        
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('login'))
-    
-    
-    
+
+
+
 @lm.user_loader
 def load_user(username):
     u = USER_COLLECTION.find_one({"_id": username})
     if not u:
         return None
     return User(u['_id'])
-    
-    
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
