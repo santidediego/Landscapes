@@ -89,4 +89,9 @@ y el contenedor comienza a instalarse. No hace falta hacer nada más, una vez te
 Se puede encontrar el docker de mi proyecto [aquí](https://hub.docker.com/r/santidediego/landscapes/)
 
 #Despliegue automático con fabric
-He decidido hacer un depsliegue con fabric en una Máquina Virtual Azure con Ubuntu 15, para ello, utilizaré un fichero [fabfile.py](https://github.com/santidediego/Landscapes/blob/master/fabfile.py) en el que aparecen varias directivas para trabajar remotamente con nuestra MV. El proceso seguido es similar al utilizado para la [creación de la base MongoDB en Azure](https://github.com/santidediego/Landscapes/blob/master/Instalacion_configuracion_bd_azure.md) solo que con otra máquina virtual distinta. En este caso podemos conectarnos a nuestra máquina por ssh con `ssh 40.114.215.241 `
+He decidido hacer un depsliegue con fabric en una Máquina Virtual Azure con Ubuntu 15, para ello, utilizaré un fichero [fabfile.py](https://github.com/santidediego/Landscapes/blob/master/fabfile.py) en el que aparecen varias directivas para trabajar remotamente con nuestra MV. El proceso seguido es similar al utilizado para la [creación de la base MongoDB en Azure](https://github.com/santidediego/Landscapes/blob/master/Instalacion_configuracion_bd_azure.md) solo que con otra máquina virtual distinta. En este caso podemos conectarnos a nuestra máquina por ssh con `ssh 40.74.49.235 `
+
+##Problema: Utilización de python 2.7
+Fabric no está disponible para python 3.5, y por tanto he tenido que crearme aparte un entorno virtual con python 2.7, instalar fabric en él con `pip install fabric` y ejecutar el comando desde ese entorno virtual; es un poco engorroso pero es la única solución y además funciona.
+
+Ahora, para hacer el despliegue, basta ejecutar `fab deploy` y comienza a desplegarse. [Aquí](https://github.com/santidediego/Landscapes/blob/master/Fabric.md) podemos ver los detalles

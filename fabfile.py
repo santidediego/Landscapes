@@ -1,25 +1,27 @@
 from fabric.api import *
 env.user = 'santiago'
-env.hosts = '40.114.215.241'
+env.hosts = '40.74.49.235'
 
 def deploy():
     run('sudo apt-get update')
     run('sudo apt-get install -y git')
-    run('cd /home && sudo git clone https://github.com/santidediego/Landscapes')
+    run('cd /home/santiago && sudo git clone https://github.com/santidediego/Landscapes')
     #Install
     run('sudo apt-get install -y python3-pip')
     run('sudo apt-get install -y python-software-properties') #Necesario para que funciones add-apt-repository
     run('sudo apt-get install build-essential')
-    run('make install')
-    
+    run('sudo apt-get install python3-nose')
+    run('cd /home/santiago/Landscapes && make install')
+
 def execute():
-    run('cd /home && python3 inicio.py')
-    
+    run('cd /home/santiago/Landscapes && python3 inicio.py')
+
 #Instalacion de docker y descarga de imagen
 def getDocker():
     run('sudo apt-get update')
     run('sudo apt-get install -y docker.io')
-    run('sudo docker pull santidediego/landscapes')
-    
+    run('mkdir /home/santiago/Contenedor')
+    run('cd /home/santiago/Contenedor && sudo docker pull santidediego/landscapes')
+
 def test():
-    run('cd /home/Landscapes && nosetests ./tests/test.py')
+    run('cd /home/santiago/Landscapes && nosetests ./tests/test.py')
