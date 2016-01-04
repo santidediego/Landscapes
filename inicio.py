@@ -101,9 +101,7 @@ def guardar_sitio(form):
     })
     #Ahora hay que insertar un lugar en la lista de lugares del usuario autentificado.
     my_list=current_user["_lugares"]
-    USER_COLLECTION.update( {"_id": str(current_user._id)}, {"_lugares":my_list.append(geocode_result)}
-        
-        
+    USER_COLLECTION.update( {"_id": str(current_user._id)}, {"_lugares":my_list.append(geocode_result)}  
     )
 
 @app.route("/",methods=['GET', 'POST'])
