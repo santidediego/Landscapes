@@ -89,15 +89,22 @@ def guardar_datos(form):
                             "_password": str(form.password.data),
                             "_lastname": str(form.lastname.data),
                             "_name": str(form.name.data),
-                            "_email": str(form.email.data)
+                            "_email": str(form.email.data),
+                            "_lugares": list()
                             })
                             
 def guardar_sitio(form):
     geocode_result = gmaps.geocode(str(form.location.data)) #Geolocalizamos la direccion
     PLACE_COLLECTION.insert({"title": str(form.title.data),
                              "description": str(form.description.data),
-                             "location": str(geocode_result)       
+                             "location": geocode_result       
     })
+    #Ahora hay que insertar un lugar en la lista de lugares del usuario autentificado.
+    my_list=current_user["_lugares"]
+    USER_COLLECTION.update( {"_id": str(current_user._id)}, {"_lugares":my_list.append(geocode_result)}
+        
+        
+    )
 
 @app.route("/",methods=['GET', 'POST'])
 def portada():
