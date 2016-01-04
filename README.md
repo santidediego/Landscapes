@@ -98,7 +98,7 @@ Ahora, para hacer el despliegue, basta ejecutar `fab deploy` y comienza a desple
 
 #Creación de una MV en Azure con Vagrant y provisionamiento con Ansible
 
-En mi caso lo he realizado en un equipo con Mac Os X. Para esta parte lo primero es instalar Vagrant de [aquí]() y Ansible, que podemos hacerlo con `brew install ansible`. Una vez hecho esto, he seguido el [siguiente tutorial]() para conectar mi cuenta de Azure con Vagrant y de ahí he elaborado el correspondiente [Vagrantfile]().
+En mi caso lo he realizado en un equipo con Mac Os X. Para esta parte lo primero es instalar Vagrant de [aquí](https://www.vagrantup.com/downloads.html) y Ansible, que podemos hacerlo con `brew install ansible`. Una vez hecho esto, he seguido el [siguiente tutorial](https://github.com/Azure/vagrant-azure) para conectar mi cuenta de Azure con Vagrant y de ahí he elaborado el correspondiente [Vagrantfile](https://github.com/santidediego/Landscapes/blob/master/Vagrantfile).
 
 ##Cómo funciona
-EL Vagrantfile se conecta con la MV en Azure después de crearla e instala todo lo que aparece en mi receta de Ansible que podemos encontrar en la carpeta ansible como [webservice.yml](). De esta manera se despliega la aplicación en la MV.
+EL Vagrantfile se conecta con la MV en Azure después de crearla e instala todo lo que aparece en mi receta de Ansible que podemos encontrar en la carpeta ansible como [webservice.yml](https://github.com/santidediego/Landscapes/blob/master/ansible/webservice.yml). De esta manera se despliega la aplicación en la MV sin más que ejecutar `vagrant up`.
