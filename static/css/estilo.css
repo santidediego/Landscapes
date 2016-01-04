@@ -18,10 +18,6 @@ h1.portada
     padding-bottom: 6%;
 }
 
-form.registro
-{
-    font-size: 2em;
-}
 
 /* Custom default button */
 .btn-default,
@@ -38,16 +34,6 @@ form.registro
 .btn-primary:focus {
   padding-left: 3%;
   padding-right: 3%;
-}
-
-input
-{
-    color: black;
-}
-
-label
-{
-    color: white;
 }
 
 h2.portada

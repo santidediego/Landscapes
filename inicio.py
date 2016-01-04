@@ -5,6 +5,7 @@ from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField,
 from pymongo import MongoClient
 from flask.ext.login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
+import googlemaps #API de google maps
 
 
 app = Flask(__name__)
@@ -13,6 +14,8 @@ lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
 
+
+gmaps = googlemaps.Client(key='AIzaSyB9H9BpcEUq_0uXj3d1gvq31FnfMZAGPPo') #Conectamos con google maps
 
 
 #Database config
@@ -25,8 +28,6 @@ DEBUG = True
 
 
 #Users config
-
-
 class User():
 
     def __init__(self, username):
@@ -64,6 +65,7 @@ class RegistrationForm(Form):
             validators.Length(min=6, max=35),
             validators.Regexp(regex='\w+@(\w+)\.com|es',message='Dirección no válida')])
     confirm = PasswordField('Repite la contraseña')
+    
 
 class LoginForm(Form):
     username = TextField('Nombre de Usuario', [validators.Length(min=4, max=25)])
@@ -71,6 +73,13 @@ class LoginForm(Form):
         validators.Required()
     ])
 
+class UploadForm(Form):
+    title = TextField('Título del Landscape', [validators.Length(min=4, max=25)])
+    description = TextAreaField('Descripción:',[validators.Length(min=1,max=200)])
+    location = TextField('Dirección de la toma', [validators.Length(min=4, max=80)])
+
+
+#Functions
 def guardar_datos(form):
     USER_COLLECTION.insert({"_id": str(form.username.data),
                             "_password": str(form.password.data),
@@ -127,7 +136,10 @@ def lugares():
 @app.route("/subir",methods=['GET', 'POST'])
 @login_required
 def subir():
-        return render_template("subir.html")
+        form = UploadForm(request.form)
+        if request.method == 'POST' and form.validate():
+             return redirect('/')
+        return render_template("subir.html",form=form)
 
 @app.route("/nosotros",methods=['GET', 'POST'])
 @login_required
@@ -140,6 +152,7 @@ def contacto():
         return render_template("contacto.html")
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
