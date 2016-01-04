@@ -78,6 +78,9 @@ class UploadForm(Form):
     title = TextField('Título del Landscape', [validators.Length(min=4, max=25)])
     description = TextAreaField('Descripción:',[validators.Length(min=1,max=200)])
     location = TextField('Dirección de la toma', [validators.Length(min=4, max=80)])
+    
+class SearchForm(Form):
+    place = TextField('Introduzca un lugar', [validators.Length(min=4, max=25)])
 
 
 #Functions
@@ -139,7 +142,10 @@ def inicio():
 @app.route("/lugares",methods=['GET', 'POST'])
 @login_required
 def lugares():
-        return render_template("lugares.html")
+        form = SearchForm(request.form)
+        if request.method == 'POST' and form.validate():
+            pass #provisional
+        return render_template("lugares.html",form=form)
 
 @app.route("/subir",methods=['GET', 'POST'])
 @login_required
