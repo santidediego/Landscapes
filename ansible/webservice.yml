@@ -1,0 +1,23 @@
+---
+- hosts: 40.122.200.191
+  user: vagrant
+  sudo: yes
+
+  tasks:
+    ##
+    # Instalación de paquetes necesarios.
+    ##
+    - name: Update
+      command: apt-get update
+
+    - name: Installs git
+      command: apt-get install -y git
+
+    - name: Clone Landscapes
+      shell: rm -r Landscapes && git clone https://github.com/santidediego/Landscapes
+
+    - name: Installs some packages
+      command: apt-get install -y python3-pip python-software-properties build-essential python3-nose
+
+    - name: Installs everything
+      shell: cd Landscapes/ && make install

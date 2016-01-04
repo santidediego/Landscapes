@@ -100,6 +100,10 @@ def guardar_sitio(form):
                              "location": geocode_result       
     })
     #Ahora hay que insertar un lugar en la lista de lugares del usuario autentificado.
+    '''
+   Si no funciona hacerlo de otra forma tal y como pone en este blog: http://codehero.co/mongodb-desde-cero-actualizaciones-updates/ 
+    '''
+    
     my_list=current_user["_lugares"]
     USER_COLLECTION.update( {"_id": str(current_user._id)}, {"_lugares":my_list.append(geocode_result)}  
     )

@@ -95,3 +95,10 @@ He decidido hacer un depsliegue con fabric en una Máquina Virtual Azure con Ubu
 Fabric no está disponible para python 3.5, y por tanto he tenido que crearme aparte un entorno virtual con python 2.7, instalar fabric en él con `pip install fabric` y ejecutar el comando desde ese entorno virtual; es un poco engorroso pero es la única solución y además funciona.
 
 Ahora, para hacer el despliegue, basta ejecutar `fab deploy` y comienza a desplegarse. [Aquí](https://github.com/santidediego/Landscapes/blob/master/Fabric.md) podemos ver los detalles
+
+#Creación de una MV en Azure con Vagrant y provisionamiento con Ansible
+
+En mi caso lo he realizado en un equipo con Mac Os X. Para esta parte lo primero es instalar Vagrant de [aquí]() y Ansible, que podemos hacerlo con `brew install ansible`. Una vez hecho esto, he seguido el [siguiente tutorial]() para conectar mi cuenta de Azure con Vagrant y de ahí he elaborado el correspondiente [Vagrantfile]().
+
+##Cómo funciona
+EL Vagrantfile se conecta con la MV en Azure después de crearla e instala todo lo que aparece en mi receta de Ansible que podemos encontrar en la carpeta ansible como [webservice.yml](). De esta manera se despliega la aplicación en la MV.
