@@ -1,0 +1,19 @@
+---
+- hosts: 104.43.166.0
+  user: vagrant
+  sudo: yes
+
+  tasks:
+    ##
+    # Instalación de paquetes necesarios.
+    ##
+
+    - name: Prepare SO
+      command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+      command: echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+
+    - name: Update
+      command: apt-get update
+
+    - name: Installs mongodb
+      apt: name=mongodb state=latest
