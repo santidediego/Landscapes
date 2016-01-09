@@ -15,7 +15,7 @@ La idea del proyecto surge de una necesidad que me planteé en su día como fot�
 
 ##Detalles en la elaboración
 
-Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos gestionada con mySQL con los usuarios y sus lugares marcados en un servidor en la nube. El despliegue lo haré en Heroku.
+Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos MongoDB en una máquina Virtual con Azure con los usuarios (datos personales) y sus lugares marcados, así como la foto correspondiente. Además configuraré todo el despliegue automático de la aplicación completa, también en otra MV en Azure y en Heroku.
 
 Para el desarrollo de la aplicación web utilizaremos el framework [Flask](http://flask.pocoo.org)
 
