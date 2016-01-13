@@ -58,8 +58,8 @@ class BD_Test(unittest.TestCase):
     
     #Haremos las pruebas con una BD test que es distinta de la de produccion
     def test_create_user(self):
-           client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')  
-           db=client['test']
+           client = MongoClient('mongodb://mongouser:09021993@ds045475.mongolab.com:45475/landscapes')    
+           db=client['landscapes']
            db.test_collection.save(
            {
                "username": "ejemplo",
@@ -67,8 +67,8 @@ class BD_Test(unittest.TestCase):
            })
            
     def test_delete_user(self):
-           client = MongoClient('mongodb://mongouser:09021993@40.121.141.129:27017')  
-           db=client['test']
+           client = MongoClient('mongodb://mongouser:09021993@ds045475.mongolab.com:45475/landscapes')  
+           db=client['landscapes']
            db.test_collection.remove({"username": "ejemplo"})
            
 if __name__ == '__main__':

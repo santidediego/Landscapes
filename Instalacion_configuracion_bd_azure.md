@@ -16,4 +16,4 @@ user: mongouser
 
 password: 09021993
 
-Conexión: `mongo --host 40.117.96.16 --port 27017 -u mongouser -p 09021993 --authenticationDatabase admin`
+Conexión: `mongo --host 40.121.141.129 --port 27017 -u mongouser -p 09021993 --authenticationDatabase admin`

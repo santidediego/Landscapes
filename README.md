@@ -15,7 +15,9 @@ La idea del proyecto surge de una necesidad que me planteé en su día como fot�
 
 ##Detalles en la elaboración
 
-Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos MongoDB en una máquina Virtual con Azure con los usuarios (datos personales) y sus lugares marcados, así como la foto correspondiente. Además configuraré todo el despliegue automático de la aplicación completa, también en otra MV en Azure y en Heroku.
+Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos MongoDB en una máquina Virtual con Azure con los usuarios (datos personales) y sus lugares marcados, así como la foto correspondiente. Esta MV la he creado con MongoLab alojándola en Azure, después de hacerlo una vez para el prototipo en Azure pero instalándola yo en una máquina virtual pero me decanté por usar MongoLab ya que era mucho más sencillo de configurar. Podemos ver la forma tracicional de hacerlo [aquí](https://github.com/santidediego/Landscapes/blob/master/Instalacion_configuracion_bd_azure.md), creando la MV desde cero.
+
+Además configuraré todo el despliegue automático de la aplicación completa, también en otra MV en Azure y en Heroku.
 
 Para el desarrollo de la aplicación web utilizaremos el framework [Flask](http://flask.pocoo.org)
 
