@@ -1,5 +1,5 @@
 ---
-- hosts: 40.122.200.191
+- hosts: default
   user: vagrant
   sudo: yes
 

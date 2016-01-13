@@ -21,7 +21,7 @@ gmaps = googlemaps.Client(key='AIzaSyB9H9BpcEUq_0uXj3d1gvq31FnfMZAGPPo') #Conect
 #Database config
 WTF_CSRF_ENABLED = True
 #client = MongoClient('mongodb://localhost:27017/')
-client = MongoClient('mongodb://mongouser:09021993@40.117.96.16:27017')
+client = MongoClient('mongodb://mongouser:09021993@40.121.141.129:27017')
 database = client['Mongo_DB']
 USER_COLLECTION = database.users
 PLACE_COLLECTION = database.places

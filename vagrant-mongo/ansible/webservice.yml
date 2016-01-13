@@ -1,5 +1,5 @@
 ---
-- hosts: 104.43.166.0
+- hosts: default
   user: vagrant
   sudo: yes
 
