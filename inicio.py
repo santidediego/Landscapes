@@ -21,11 +21,11 @@ gmaps = googlemaps.Client(key='AIzaSyB9H9BpcEUq_0uXj3d1gvq31FnfMZAGPPo') #Conect
 #Database config
 WTF_CSRF_ENABLED = True
 #client = MongoClient('mongodb://localhost:27017/')
-client = MongoClient('mongodb://mongouser:09021993@ds045475.mongolab.com:45475/landscapes')  
+client = MongoClient('mongodb://mongouser:09021993@ds045475.mongolab.com:45475/landscapes')
 database=client['landscapes']
 USER_COLLECTION = database.users
 PLACE_COLLECTION = database.places
-DEBUG = True
+DEBUG = False
 
 
 #Users config
@@ -66,7 +66,7 @@ class RegistrationForm(Form):
             validators.Length(min=6, max=35),
             validators.Regexp(regex='\w+@(\w+)\.com|es',message='Dirección no válida')])
     confirm = PasswordField('Repite la contraseña')
-    
+
 
 class LoginForm(Form):
     username = TextField('Nombre de Usuario', [validators.Length(min=4, max=25)])
@@ -78,7 +78,7 @@ class UploadForm(Form):
     title = TextField('Título del Landscape', [validators.Length(min=4, max=25)])
     description = TextAreaField('Descripción:',[validators.Length(min=1,max=200)])
     location = TextField('Dirección de la toma', [validators.Length(min=4, max=80)])
-    
+
 class SearchForm(Form):
     place = TextField('Introduzca un lugar', [validators.Length(min=4, max=25)])
 
@@ -92,20 +92,20 @@ def guardar_datos(form):
                             "_email": str(form.email.data),
                             "_lugares": list()
                             })
-                            
+
 def guardar_sitio(form):
     geocode_result = gmaps.geocode(str(form.location.data)) #Geolocalizamos la direccion
     PLACE_COLLECTION.insert({"title": str(form.title.data),
                              "description": str(form.description.data),
-                             "location": geocode_result       
+                             "location": geocode_result
     })
     #Ahora hay que insertar un lugar en la lista de lugares del usuario autentificado.
     '''
-   Si no funciona hacerlo de otra forma tal y como pone en este blog: http://codehero.co/mongodb-desde-cero-actualizaciones-updates/ 
+   Si no funciona hacerlo de otra forma tal y como pone en este blog: http://codehero.co/mongodb-desde-cero-actualizaciones-updates/
     '''
-    
+
     my_list=current_user["_lugares"]
-    USER_COLLECTION.update( {"_id": str(current_user._id)}, {"_lugares":my_list.append(geocode_result)}  
+    USER_COLLECTION.update( {"_id": str(current_user._id)}, {"_lugares":my_list.append(geocode_result)}
     )
 
 @app.route("/",methods=['GET', 'POST'])
