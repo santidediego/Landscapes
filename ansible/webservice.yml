@@ -21,3 +21,6 @@
 
     - name: Installs everything
       shell: cd Landscapes/ && make install
+
+    - name: Execution
+      shell: cd Landscapes/ && nohup python3 inicio.py 0.0.0.0:80 &

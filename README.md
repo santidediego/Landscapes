@@ -4,6 +4,8 @@
 
 [![Heroku](https://www.herokucdn.com/deploy/button.png)](https://landscapes93.herokuapp.com)
 
+[<img src="http://azuredeploy.net/deploybutton.png" alt="Azure" height=32>](landscapes-vagrantazure-service-cycii.cloudapp.net) 
+
 Repositorio para el proyecto de una infraestructura virtual para complementar el proyecto de la asignatura de Diseño de Aplicaciones para Internet.
 
 
@@ -15,9 +17,9 @@ La idea del proyecto surge de una necesidad que me planteé en su día como fot�
 
 ##Detalles en la elaboración
 
-Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos MongoDB en una máquina Virtual con Azure con los usuarios (datos personales) y sus lugares marcados, así como la foto correspondiente. Esta MV la he creado con MongoLab alojándola en Azure, después de hacerlo una vez para el prototipo en Azure pero instalándola yo en una máquina virtual pero me decanté por usar MongoLab ya que era mucho más sencillo de configurar. Podemos ver la forma tracicional de hacerlo [aquí](https://github.com/santidediego/Landscapes/blob/master/Instalacion_configuracion_bd_azure.md), creando la MV desde cero.
+Mi proyecto de Infraestructura Virtual consiste en la automatización de la creación de toda la base de datos MongoDB en una máquina Virtual con Azure con los usuarios (datos personales) y sus lugares marcados, así como la foto correspondiente. Esta MV la he creado con MongoLab alojándola en Azure, después de hacerlo una vez para el prototipo en Azure pero instalándola yo en una máquina virtual pero me decanté por usar MongoLab ya que era mucho más sencillo de configurar. Podemos ver la forma tradicional de hacerlo [aquí](https://github.com/santidediego/Landscapes/blob/master/Instalacion_configuracion_bd_azure.md), creando la MV desde cero.
 
-Además configuraré todo el despliegue automático de la aplicación completa, también en otra MV en Azure y en Heroku.
+Además configuraré todo el despliegue automático de la aplicación completa, también en otra MV en Azure y en Heroku. Además he configurado el despliegue de otra máquina virtual en azure para producción.
 
 Para el desarrollo de la aplicación web utilizaremos el framework [Flask](http://flask.pocoo.org)
 
@@ -91,12 +93,13 @@ y el contenedor comienza a instalarse. No hace falta hacer nada más, una vez te
 Se puede encontrar el docker de mi proyecto [aquí](https://hub.docker.com/r/santidediego/landscapes/)
 
 #Despliegue automático con fabric
-He decidido hacer un depsliegue con fabric en una Máquina Virtual Azure con Ubuntu 15, para ello, utilizaré un fichero [fabfile.py](https://github.com/santidediego/Landscapes/blob/master/fabfile.py) en el que aparecen varias directivas para trabajar remotamente con nuestra MV. El proceso seguido es similar al utilizado para la [creación de la base MongoDB en Azure](https://github.com/santidediego/Landscapes/blob/master/Instalacion_configuracion_bd_azure.md) solo que con otra máquina virtual distinta. En este caso podemos conectarnos a nuestra máquina por ssh con `ssh 40.74.49.235 `
+He decidido hacer un despliegue con fabric en una Máquina Virtual Azure con Ubuntu 15, para ello, utilizaré un fichero [fabfile.py](https://github.com/santidediego/Landscapes/blob/master/fabfile.py) en el que aparecen varias directivas para trabajar remotamente con nuestra MV. El proceso seguido es similar al utilizado para la [creación de la base MongoDB en Azure](https://github.com/santidediego/Landscapes/blob/master/Instalacion_configuracion_bd_azure.md) solo que con otra máquina virtual distinta. En este caso podemos conectarnos a nuestra máquina por ssh con `ssh 40.74.49.235 `
+
 
 ##Problema: Utilización de python 2.7
 Fabric no está disponible para python 3.5, y por tanto he tenido que crearme aparte un entorno virtual con python 2.7, instalar fabric en él con `pip install fabric` y ejecutar el comando desde ese entorno virtual; es un poco engorroso pero es la única solución y además funciona.
 
-Ahora, para hacer el despliegue, basta ejecutar `fab deploy` y comienza a desplegarse. [Aquí](https://github.com/santidediego/Landscapes/blob/master/Fabric.md) podemos ver los detalles
+Ahora, para hacer el despliegue, basta ejecutar `fab deploy` y comienza a desplegarse. [Aquí](https://github.com/santidediego/Landscapes/blob/master/Fabric.md) podemos ver los detalles.
 
 #Creación de una MV en Azure con Vagrant y provisionamiento con Ansible
 
@@ -107,3 +110,9 @@ EL Vagrantfile se conecta con la MV en Azure después de crearla e instala todo 
 
 Además he configurado el despliegue y la configuración automática de una BD Mongo en otra MV de Azure. Para desplegarla, hay que entrar a la carpeta [vagrant-mongo](https://github.com/santidediego/Landscapes/tree/master/vagrant-mongo) y ejecutar `vagrant up` donde hay definido otro Vagrantfile que se encarga de esta parte. He decidido hacerlo de esta manera para que el usuario pueda elegir qué quiere desplegar por separado, y que no se desplieguen las dos cosas a la vez cuando se haga `vagrant up`
 No obstante, la principal base de datos la monta automáticamente MongoLab, pero pongo el Vagrantfile por si se desea montarla en azure por cuenta propia.
+
+Además he incluido otro Vagrantfile en la carpeta [Servidor de producción](https://github.com/santidediego/Landscapes/tree/master/Servidor_produccion) para crear otra MV que sirva para producción.
+
+##Combinándolo con Fabric
+
+Podemos utilizar Fabric para trabajar con nuestra MV en Azure creada con Vagrant desde un equipo remoto, sin más que utilizar la dirección `168.61.157.18` correspondiente a la dirección de la MV (Actualmente tengo puesta esta en el archivo de configuración para no tener que cambiarla). Para ver los comandos disponibles ver la sección de Fabric más atrás.

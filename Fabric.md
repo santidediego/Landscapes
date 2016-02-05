@@ -12,3 +12,4 @@ Podemos ejecutar otros comandos como:
 - execute: para ejecutarlo
 - getDocker: para instalar el contenedor
 - test: para pasar los test
+- pull: para descargar la última versión de la aplicación

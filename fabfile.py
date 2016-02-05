@@ -1,6 +1,6 @@
 from fabric.api import *
 env.user = 'santiago'
-env.hosts = '40.74.49.235'
+env.hosts = '168.61.157.18'
 
 def deploy():
     run('sudo apt-get update')
@@ -22,6 +22,9 @@ def getDocker():
     run('sudo apt-get install -y docker.io')
     run('mkdir /home/santiago/Contenedor')
     run('cd /home/santiago/Contenedor && sudo docker pull santidediego/landscapes')
+
+def pull():
+	run('cd /home/santiago/Landscapes && sudo git pull')
 
 def test():
     run('cd /home/santiago/Landscapes && nosetests ./tests/test.py')
