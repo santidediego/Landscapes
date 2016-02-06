@@ -209,6 +209,7 @@ def subir():
 def subir_1():
         form = UploadForm(request.form)
         if request.method == 'POST' and form.validate():
+            print("Entro por aquí")
             guardar_sitio(request.form)
         return render_template("subir_1.html",form=form)
 
