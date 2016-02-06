@@ -6,9 +6,12 @@ from pymongo import MongoClient
 from flask.ext.login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
 import googlemaps #API de google maps
+from flask.ext.googlemaps import GoogleMaps
+from flask.ext.googlemaps import Map
 
 
 app = Flask(__name__)
+GoogleMaps(app)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 lm = LoginManager()
 lm.init_app(app)
@@ -84,7 +87,7 @@ class UploadForm(Form):
         ])
     coord2 = TextField('Longitud', [
     validators.Length(min=1,message='Número de dígitos incorrecto'),
-    validators.Regexp(regex='\d+',message='Formato incorrecto')
+    validators.Regexp(regex='\d+',message='Formato incorrecto')         #Añadir posibilidad de decimales!!!!
     ])
 
 class SearchForm(Form):
@@ -154,10 +157,22 @@ def inicio():
 @app.route("/lugares",methods=['GET', 'POST'])
 @login_required
 def lugares():
+        sndmap = Map(
+            identifier="sndmap",
+            lat=37.4419,
+            lng=-122.1419,
+            style="height:25%;width:25%;top=0;left=0;position:absolute;z-index:200;",
+            zoom='50',
+            maptype="TERRAIN",
+            infobox=["<img src='http://static.ellahoy.es/630X390/www/ellahoy/es/img/guapa-post.jpg' height=100 width=100>","<img src='http://realmoda.es/wp-content/uploads/2011/07/guapa.jpg' height=100 width=100>"],
+            markers={'http://maps.google.com/mapfiles/ms/icons/green-dot.png':[(37.4419, -122.1419, tu),(37.4300, -122.1400, yo)]}
+        )
+
         form = SearchForm(request.form)
         if request.method == 'POST' and form.validate():
             pass #provisional
-        return render_template("lugares.html",form=form)
+
+        return render_template("lugares.html",form=form,sndmap=sndmap)
 
 @app.route("/subir",methods=['GET', 'POST'])
 @login_required

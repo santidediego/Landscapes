@@ -12,3 +12,4 @@ WTForms==2.0.2
 nose==1.3.7
 Fabric==1.10.2
 googlemaps==2.4.2
+flask-googlemaps==0.1.9
