@@ -208,6 +208,7 @@ def subir():
 @login_required
 def subir_1():
         form = UploadForm(request.form)
+        print("Entro por aquí")
         if request.method == 'POST' and form.validate():
             print("Entro por aquí")
             guardar_sitio(request.form)
@@ -217,7 +218,9 @@ def subir_1():
 @login_required
 def subir_2():
         form = UploadForm(request.form)
+        print("Entro por aquí")
         if request.method == 'POST' and form.validate():
+            print("Entro por aquí")
             guardar_sitio(request.form)
         return render_template("subir_2.html",form=form)
 
