@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, SelectField, RadioField, DateField, validators
+from wtforms import Form, BooleanField, TextField, PasswordField, TextAreaField, SelectField, FileField, RadioField, DecimalField, DateField, validators
 from pymongo import MongoClient
 from flask.ext.login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
@@ -30,10 +30,9 @@ USER_COLLECTION = database.users
 PLACE_COLLECTION = database.places
 """
 En places almacenamos lo siguiente:
+    -   id_lugar
     -   id_usuario
-    -   Imagen
     -   Coordenadas
-    -   Dirección (País, Ciudad, Calle)
     -   Descripción
 """
 DEBUG = False
@@ -86,17 +85,16 @@ class LoginForm(Form):
     ])
 
 class UploadForm(Form):
-    title = TextField('Título del Landscape', [validators.Length(min=4, max=25)])
-    description = TextAreaField('Descripción:',[validators.Length(min=1,max=200)])
+    title = TextField('Título del Landscape', [validators.Required(),validators.Length(min=4, max=25)])
+    description = TextAreaField('Descripción:',[validators.Required(),validators.Length(min=1,max=200)])
     location = TextField('Dirección de la toma', [validators.Length(min=4, max=80)])
-    coord1 = TextField('Latitud', [
-        validators.Length(min=1,message='Número de dígitos incorrecto'),
-        validators.Regexp(regex='\d+',message='Formato incorrecto')
-        ])
-    coord2 = TextField('Longitud', [
-    validators.Length(min=1,message='Número de dígitos incorrecto'),
-    validators.Regexp(regex='\d+',message='Formato incorrecto')         #Añadir posibilidad de decimales!!!!
-    ])
+    coord1 = DecimalField('Latitud', [
+        validators.Length(min=1,message='Número de dígitos incorrecto')
+        ], places=6)
+    coord2 = DecimalField('Longitud', [
+    validators.Required()
+    ],places=6)
+    photo = FileField('Pon aquí tu foto')
 
 class SearchForm(Form):
     place = TextField('Introduzca un lugar', [validators.Length(min=4, max=25)])
@@ -113,11 +111,30 @@ def guardar_datos(form):
                             })
 
 def guardar_sitio(form):
-    geocode_result = gmaps.geocode(str(form.location.data)) #Geolocalizamos la direccion
-    PLACE_COLLECTION.insert({"title": str(form.title.data),
-                             "description": str(form.description.data),
-                             "location": geocode_result
-    })
+    if form.location.data is not None:
+        print("He entrado por la primera opción")
+        geocode_result = gmaps.geocode(str(form.location.data)) #Geolocalizamos la direccion
+        print("He completado el geocode")
+        PLACE_COLLECTION.insert({"title": str(form.title.data),
+                                "description": str(form.description.data),
+                                "coord1": geocode_result[0],
+                                "coord2": geocode_result[1],
+                                "location": str(form.location.data),
+                                "filename": form.photo.data.filename
+                                })
+        print("Las coordenadas son:"+str(geocode_result[0])+" "+str(geocode_result[1]))
+    else:
+        print("He entrado por la segunda opción")
+        PLACE_COLLECTION.insert({"title": str(form.title.data),
+                                "description": str(form.description.data),
+                                "coord1": form.coord1.data,
+                                "coord2": form.coord2.data,
+                                "location": None,
+                                "filename": form.photo.data.filename
+                                })
+        print("Las coordenadas son:"+str(form.coord1.data)+" "+str(form.coord2.data))
+    form.photo.data.save('uploads/' + filename)
+    print("He subido la imagen")
     #Ahora hay que insertar un lugar en la lista de lugares del usuario autentificado.
     '''
    Si no funciona hacerlo de otra forma tal y como pone en este blog: http://codehero.co/mongodb-desde-cero-actualizaciones-updates/
@@ -173,7 +190,7 @@ def lugares():
             zoom='50',
             maptype="TERRAIN",
             infobox=["<img src='http://static.ellahoy.es/630X390/www/ellahoy/es/img/guapa-post.jpg' height=100 width=100>","<img src='http://realmoda.es/wp-content/uploads/2011/07/guapa.jpg' height=100 width=100>"],
-            markers={'http://maps.google.com/mapfiles/ms/icons/green-dot.png':[(37.4419, -122.1419, tu),(37.4300, -122.1400, yo)]}
+            markers={'http://maps.google.com/mapfiles/ms/icons/green-dot.png':[(37.4419, -122.1419),(37.4300, -122.1400)]}
         )
 
         form = SearchForm(request.form)
@@ -192,7 +209,7 @@ def subir():
 def subir_1():
         form = UploadForm(request.form)
         if request.method == 'POST' and form.validate():
-             return redirect('/')
+            guardar_sitio(request.form)
         return render_template("subir_1.html",form=form)
 
 @app.route("/subir_2",methods=['GET', 'POST'])
@@ -200,7 +217,7 @@ def subir_1():
 def subir_2():
         form = UploadForm(request.form)
         if request.method == 'POST' and form.validate():
-             return redirect('/')
+            guardar_sitio(request.form)
         return render_template("subir_2.html",form=form)
 
 @app.route("/contacto",methods=['GET', 'POST'])

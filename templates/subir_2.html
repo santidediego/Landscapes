@@ -24,7 +24,7 @@
               </dd>
    {% endmacro %}
             
-            <form method=post action="/">
+            <form>
                 <h2 class= "main">Suba su Landscape</h2>
                 <dl>
                 <div class="form-group">
@@ -36,6 +36,9 @@
                 <div class="form-group">
                     {{ render_field(form.description) }}
                 </div>
+		<div form action="/upload/" method="POST" enctype="multipart/form-data">
+		    {{ render_field(form.photo) }}
+		</div>
               </dl>
               <p><input class="btn btn-sm btn-primary" type=submit value=Subir>
               </p>
