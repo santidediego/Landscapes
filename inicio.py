@@ -109,8 +109,8 @@ def guardar_datos(form):
 def guardar_sitio(form):
     print("Estoy en el método guardar_sitio")
     if form.location.data != None:
-        print("He entrado por la primera opción")
         geocode_result = gmaps.geocode(str(form.location.data)) #Geolocalizamos la direccion
+        print("He entrado por la primera opción")
         print(geocode_result.lat + geocode_result.lng)
         PLACE_COLLECTION.insert({"title": str(form.title.data),
                                 "description": str(form.description.data),
@@ -119,7 +119,7 @@ def guardar_sitio(form):
                                 "location": str(form.location.data),
                                 "filename": form.photo.data.filename
                                 })
-        print("Las coordenadas son:"+str(geocode_result[0])+" "+str(geocode_result[1]))
+        print("Las coordenadas sonlas que sean)
     else:
         print("He entrado por la segunda opción")
         PLACE_COLLECTION.insert({"title": str(form.title.data),
