@@ -87,13 +87,9 @@ class LoginForm(Form):
 class UploadForm(Form):
     title = TextField('Título del Landscape', [validators.Required(),validators.Length(min=4, max=25)])
     description = TextAreaField('Descripción:',[validators.Required(),validators.Length(min=1,max=200)])
-    location = TextField('Dirección de la toma', [validators.Length(min=4, max=80)])
-    coord1 = DecimalField('Latitud', [
-        validators.Length(min=1,message='Número de dígitos incorrecto')
-        ], places=6)
-    coord2 = DecimalField('Longitud', [
-    validators.Required()
-    ],places=6)
+    location = TextField('Dirección de la toma')
+    coord1 = DecimalField('Latitud', places=6)
+    coord2 = DecimalField('Longitud', places=6)
     photo = FileField('Pon aquí tu foto')
 
 class SearchForm(Form):
