@@ -111,7 +111,7 @@ def guardar_sitio(form):
     if form.location.data != None:
         print("He entrado por la primera opción")
         geocode_result = gmaps.geocode(str(form.location.data)) #Geolocalizamos la direccion
-        print("He completado el geocode")
+        print("Las coordenadas recien sacadas son:"+str(geocode_result[0])+" "+str(geocode_result[1]))
         PLACE_COLLECTION.insert({"title": str(form.title.data),
                                 "description": str(form.description.data),
                                 "coord1": geocode_result[0],
