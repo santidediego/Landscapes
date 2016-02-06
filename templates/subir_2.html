@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-<title>Página lugares</title>
+<title>Página subir</title>
 {% endblock %}
 {% block navbar %}
             <li><a href="/inicio">Inicio</a></li>
@@ -23,17 +23,23 @@
               {% endif %}
               </dd>
    {% endmacro %}
-   
-                <form method=post action="/">
-                <h2 class= "main">Introduzca un lugar para buscar Landscapes en la zona</h2>
-                <h3 class= "main">Si lo desea también puede utilizar el buscador en la barra superior</h3>
+            
+            <form method=post action="/">
+                <h2 class= "main">Suba su Landscape</h2>
                 <dl>
                 <div class="form-group">
-                    {{ render_field(form.place) }}
+                    {{ render_field(form.title) }}
+                </div>
+                 <div class="form-group">
+                    {{ render_field(form.location) }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.description) }}
                 </div>
               </dl>
-              <p><input class="btn btn-sm btn-primary" type=submit value=Buscar>
+              <p><input class="btn btn-sm btn-primary" type=submit value=Subir>
               </p>
-            </form>  
+          </form>
+            
 
 {% endblock %}

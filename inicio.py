@@ -78,6 +78,14 @@ class UploadForm(Form):
     title = TextField('Título del Landscape', [validators.Length(min=4, max=25)])
     description = TextAreaField('Descripción:',[validators.Length(min=1,max=200)])
     location = TextField('Dirección de la toma', [validators.Length(min=4, max=80)])
+    coord1 = TextField('Latitud', [
+        validators.Length(min=1,message='Número de dígitos incorrecto'),
+        validators.Regexp(regex='\d+',message='Formato incorrecto')
+        ])
+    coord2 = TextField('Longitud', [
+    validators.Length(min=1,message='Número de dígitos incorrecto'),
+    validators.Regexp(regex='\d+',message='Formato incorrecto')
+    ])
 
 class SearchForm(Form):
     place = TextField('Introduzca un lugar', [validators.Length(min=4, max=25)])
@@ -127,19 +135,14 @@ def register():
 def login():
         form = LoginForm(request.form)
         if request.method == 'POST' and form.validate():
-                print("Pasa1")
                 user = USER_COLLECTION.find_one({"_id": form.username.data})
                 print(user)
                 if user and User.validate_login(user['_password'], form.password.data):
-                    print("Pasa3")
                     user_obj = User(user['_id'])
                     login_user(user_obj)
                     flash("Correcto!", category='success')
-                    print("Pasa4")
                     return redirect('/inicio') #Hay que retocarlo, hay que usar la utilidad next que aparece en el tutorial
-                print("Pasa5")
                 flash("Nombre de usuario o contraseña erróneos!") #No hace nada, comprobar
-                print("Pasa6")
         return render_template("login.html", form=form)
 
 
@@ -159,15 +162,23 @@ def lugares():
 @app.route("/subir",methods=['GET', 'POST'])
 @login_required
 def subir():
+        return render_template("subir.html")
+
+@app.route("/subir_1",methods=['GET', 'POST'])
+@login_required
+def subir_1():
         form = UploadForm(request.form)
         if request.method == 'POST' and form.validate():
              return redirect('/')
-        return render_template("subir.html",form=form)
+        return render_template("subir_1.html",form=form)
 
-@app.route("/nosotros",methods=['GET', 'POST'])
+@app.route("/subir_2",methods=['GET', 'POST'])
 @login_required
-def nosotros():
-        return render_template("nosotros.html")
+def subir_2():
+        form = UploadForm(request.form)
+        if request.method == 'POST' and form.validate():
+             return redirect('/')
+        return render_template("subir_2.html",form=form)
 
 @app.route("/contacto",methods=['GET', 'POST'])
 @login_required

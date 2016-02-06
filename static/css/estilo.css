@@ -46,3 +46,8 @@ h3.portada
     padding-top: 3%;
     color: white ;  
 }
+
+h2.main,h3.main
+{
+    padding-bottom: 3%;
+}
