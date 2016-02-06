@@ -28,6 +28,14 @@ client = MongoClient('mongodb://mongouser:09021993@ds045475.mongolab.com:45475/l
 database=client['landscapes']
 USER_COLLECTION = database.users
 PLACE_COLLECTION = database.places
+"""
+En places almacenamos lo siguiente:
+    -   id_usuario
+    -   Imagen
+    -   Coordenadas
+    -   Dirección (País, Ciudad, Calle)
+    -   Descripción
+"""
 DEBUG = False
 
 
