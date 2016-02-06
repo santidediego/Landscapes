@@ -111,7 +111,8 @@ def guardar_datos(form):
                             })
 
 def guardar_sitio(form):
-    if form.location.data is not None:
+    print("Estoy en el método guardar_sitio")
+    if form.location.data != None:
         print("He entrado por la primera opción")
         geocode_result = gmaps.geocode(str(form.location.data)) #Geolocalizamos la direccion
         print("He completado el geocode")
@@ -211,7 +212,7 @@ def subir_1():
         print("Entro por aquí")
         if request.method == 'POST' and form.validate():
             print("Entro por aquí")
-            guardar_sitio(request.form)
+            guardar_sitio(form)
         return render_template("subir_1.html",form=form)
 
 @app.route("/subir_2",methods=['GET', 'POST'])
@@ -221,7 +222,7 @@ def subir_2():
         print("Entro por aquí")
         if request.method == 'POST' and form.validate():
             print("Entro por aquí")
-            guardar_sitio(request.form)
+            guardar_sitio(form)
         return render_template("subir_2.html",form=form)
 
 @app.route("/contacto",methods=['GET', 'POST'])
