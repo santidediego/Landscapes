@@ -10,6 +10,16 @@ body.portada
     text-align: center;
 }
 
+body.main
+{
+    background: url(../wallpaper/wallpaper.jpg) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+}
+
 h1.portada
 {
 	word-spacing: 20px;
@@ -47,7 +57,22 @@ h3.portada
     color: white ;  
 }
 
-h2.main,h3.main
+h3.main
 {
-    padding-bottom: 3%;
+    color: white;
+}
+
+label
+{
+    color: white;
+}
+
+input
+{
+    color: black;
+}
+
+p
+{
+    color: white;
 }

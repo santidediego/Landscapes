@@ -23,7 +23,7 @@
     <![endif]-->
   </head>
   
-   <body>
+   <body class="main">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -39,10 +39,11 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             {% block navbar %}
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Subir Landscape</a></li>
-            <li><a href="#">Ver Landscapes</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="/inicio">Inicio</a></li>
+            <li><a href="/subir">Subir Landscape</a></li>
+            <li><a href="/lugares">Ver Landscapes</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+            <li><a href="/nosotros">Quienes somos</a></li>
             {% endblock %}
           </ul>
           <form class="navbar-form navbar-right">

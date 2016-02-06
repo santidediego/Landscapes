@@ -185,6 +185,11 @@ def subir_2():
 def contacto():
         return render_template("contacto.html")
 
+@app.route("/nosotros",methods=['GET', 'POST'])
+@login_required
+def nosotros():
+        return render_template("nosotros.html")
+
 @app.route('/logout')
 @login_required
 def logout():

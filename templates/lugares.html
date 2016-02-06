@@ -2,13 +2,6 @@
 {% block title %}
 <title>Página lugares</title>
 {% endblock %}
-{% block navbar %}
-            <li><a href="/inicio">Inicio</a></li>
-            <li><a href="/subir">Subir Landscape</a></li>
-            <li><a href="/lugares">Ver Landscapes</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-            <li><a href="/nosotros">Quienes somos</a></li>
-{% endblock %}
 
 {% block content %}
   {% macro render_field(field) %}
@@ -25,7 +18,7 @@
    {% endmacro %}
    
                 <form method=post action="/">
-                <h2 class= "main">Introduzca un lugar para buscar Landscapes en la zona</h2>
+                <h1 class= "page-header">Introduzca un lugar para buscar Landscapes en la zona</h1>
                 <h3 class= "main">Si lo desea también puede utilizar el buscador en la barra superior</h3>
                 <dl>
                 <div class="form-group">
