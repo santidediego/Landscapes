@@ -4,7 +4,7 @@
 
 [![Heroku](https://www.herokucdn.com/deploy/button.png)](http://landscapes93.herokuapp.com)
 
-[<img src="http://azuredeploy.net/deploybutton.png" alt="Azure" height=32>](http://landscapes-vagrantazure-service-cycii.cloudapp.net) 
+[<img src="http://azuredeploy.net/deploybutton.png" alt="Azure" height=32>](http://landscapes-vagrantazure-service-fxpxh.cloudapp.net) 
 
 Repositorio para el proyecto de una infraestructura virtual para complementar el proyecto de la asignatura de Diseño de Aplicaciones para Internet.
 
