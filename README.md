@@ -24,7 +24,7 @@ Además configuraré todo el despliegue automático de la aplicación completa, 
 Para el desarrollo de la aplicación web utilizaremos el framework [Flask](http://flask.pocoo.org)
 
 ##Colaboradores
-Para la parte del diseño y puesta en marcha de la aplicación web colaboro con Javier Pérez (@neon520).
+Para la parte del diseño y puesta en marcha de la aplicación web colaboro con Javier Pérez (@neon520). La parte de la infraestructura virtual la hago yo enteramente (Despliegue, test, integración continua, BD´s...).
 
 ##Preparación del entorno Virtual
 
