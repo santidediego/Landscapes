@@ -12,19 +12,19 @@ from flask.ext.googlemaps import Map
 
 app = Flask(__name__)
 GoogleMaps(app)
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.secret_key = ''
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
 
 
-gmaps = googlemaps.Client(key='AIzaSyB9H9BpcEUq_0uXj3d1gvq31FnfMZAGPPo') #Conectamos con google maps
+gmaps = googlemaps.Client(key='') #Conectamos con google maps
 
 
 #Database config
 WTF_CSRF_ENABLED = True
 #client = MongoClient('mongodb://localhost:27017/')
-client = MongoClient('mongodb://mongouser:09021993@ds045475.mongolab.com:45475/landscapes')
+client = MongoClient('mongodb://mongouser:<passwd>@user.mongolab.com:45475/landscapes')
 database=client['landscapes']
 USER_COLLECTION = database.users
 PLACE_COLLECTION = database.places
@@ -132,9 +132,6 @@ def guardar_sitio(form):
     form.photo.data.save('uploads/' + filename)
     print("He subido la imagen")
     #Ahora hay que insertar un lugar en la lista de lugares del usuario autentificado.
-    '''
-   Si no funciona hacerlo de otra forma tal y como pone en este blog: http://codehero.co/mongodb-desde-cero-actualizaciones-updates/
-    '''
 
     my_list=current_user["_lugares"]
     USER_COLLECTION.update( {"_id": str(current_user._id)}, {"_lugares":my_list.append(geocode_result)}
@@ -165,7 +162,7 @@ def login():
                     user_obj = User(user['_id'])
                     login_user(user_obj)
                     flash("Correcto!", category='success')
-                    return redirect('/inicio') #Hay que retocarlo, hay que usar la utilidad next que aparece en el tutorial
+                    return redirect('/inicio') 
                 flash("Nombre de usuario o contraseña erróneos!") #No hace nada, comprobar
         return render_template("login.html", form=form)
 
